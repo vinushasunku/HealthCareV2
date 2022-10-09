@@ -1,0 +1,9 @@
+{
+    "firstName":{"message":"First Name is Required.","validate": true},
+    "lastName":{"message":"Last Name is Required.","validate":true},
+    "dob":{"message":"DOB is Required.","validate":true},
+    "gender":{"message":"Select Gender,","validate":true},
+    "emailAddress":{"message":"Email is Required.","validate":true},
+    "mobileNumber":{"message":"Mobile number is Required.","validate":true},
+    "password":{"message":"password is Required.","validate":true}
+}

@@ -1,0 +1,22 @@
+[{
+    "id":"1",
+    "image":"https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant1.jpeg",
+    "name":"Vinusha",
+    "title": "General Physician",
+    "experience":"24",
+    "location":"hyderabad",
+    "hospitalName":"aditya clinic",
+    "fee":"300"
+},
+{
+    "id":"2",
+    "image":"https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant1.jpeg",
+    "name":"anudeep",
+    "title": "General Physician",
+    "experience":"24",
+    "location":"hyderabad",
+    "hospitalName":"aditya clinic",
+    "fee":"300"
+
+}
+]
