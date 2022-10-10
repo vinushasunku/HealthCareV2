@@ -51,19 +51,6 @@ const ManageAccount = ({ navigation }) => {
                  <Ionicons name="person" size={200} color="#2F4F4F" />
                  <Text style={[stylessheet.textformat,stylessheet.headerfontsize, stylessheet.textColor,{textTransform:'uppercase'}]}>{loggedUserInfo.firstName +' '+ loggedUserInfo.lastName}</Text>
             </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center',  height:50,paddingTop:20}}>
-                  <View style={{flexDirection:'row', width:width/2}}>
-                    <Text style={[stylessheet.textformat,stylessheet.textColor,{  marginLeft:15 }]}>{"DOB :"}</Text>
-                    <Text style={[stylessheet.textformat,stylessheet.textColor]}>{loggedUserInfo.dob}</Text>
-                  </View>
-                  <View style={{flexDirection:'row'}}>
-                    <Text style={[stylessheet.textformat,stylessheet.textColor]}>{"Gender" }</Text>
-                    <Text style={[stylessheet.textformat,stylessheet.textColor,{paddingLeft:10, paddingRight:10}]}>{ "|"}</Text>
-                    <Text style={[stylessheet.textformat,stylessheet.textColor]}>{ loggedUserInfo.gender}</Text>
-                  </View>
-
-
-            </View>
             <View style={[styles.divider]}>
                   
             </View>

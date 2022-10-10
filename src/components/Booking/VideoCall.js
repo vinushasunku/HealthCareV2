@@ -11,7 +11,6 @@ const VideoCall = ({navigation}) => {
         userId:  useAppSelector(state => state.loginId.loginId),
         userName:  useAppSelector(state => state.loginId.userName),
         token:  useAppSelector(state => state.loginId.videoToken),
-        streamId: "patient"
     }
 
     function endCall() {
