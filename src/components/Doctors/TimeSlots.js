@@ -145,7 +145,7 @@ const TimeSlots = ({ navigation }) => {
     function bookselectedslot(){
         if(update === true){
             updateAppointmentConfirm();
-
+            navigation.goBack();
         }else{
             dispatch(setSelectselectedSlot(selectedSlot));
             dispatch(setSelectselectedDate(selectedDate));

@@ -11,15 +11,19 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.10",
+    "@react-native-community/datetimepicker": "^6.5.0",
     "@react-native-masked-view/masked-view": "^0.2.8",
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.0",
     "@react-navigation/stack": "^6.3.2",
     "@reduxjs/toolkit": "^1.8.6",
+    "@zegocloud/zego-uikit-prebuilt-call-rn": "^1.0.0",
+    "@zegocloud/zego-uikit-rn": "^1.1.0",
     "axios": "^0.27.2",
     "moment": "^2.29.4",
     "react": "17.0.2",
+    "react-delegate-component": "^1.0.0",
     "react-hook-form": "^7.37.0",
     "react-native": "0.68.1",
     "react-native-base64": "^0.2.1",
@@ -39,7 +43,8 @@
     "react-redux": "^8.0.4",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "zego-express-engine-reactnative": "^0.21.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

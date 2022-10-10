@@ -19,6 +19,8 @@ const loginSlice = createSlice({
     update:false,
     orderstatus:undefined,
     imageurl:undefined,
+    userName: undefined,
+    videoToken: undefined,
   },
   reducers: {
     setLoginId(state, action: PayloadAction<any>) {
@@ -67,11 +69,19 @@ const loginSlice = createSlice({
     setImageUrl(state, action: PayloadAction<any>) {
       state.orderstatus = action.payload
     },
+
+    setUserName(state, action: PayloadAction<any>) {
+      state.userName = action.payload
+    },
+    setVideoToken(state, action: PayloadAction<any>) {
+      state.videoToken = action.payload
+    },
   }
 })
 
 export const { setLoginId,setsignupsuccessmessage,setType,
   setDoctorId,setSelectDoctorName,setDoctorExperience,setSelectselectedSlot,
-  setSelectselectedDate,setfee,setorderId,setLabId,setStateId ,setUpdate,setOrderStatus,setImageUrl} = loginSlice.actions
+  setSelectselectedDate,setfee,setorderId,setLabId,setStateId ,setUpdate,setOrderStatus,setImageUrl,
+  setUserName, setVideoToken} = loginSlice.actions
 export default loginSlice.reducer
 

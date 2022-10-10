@@ -3,7 +3,7 @@ import { styles } from "../constants/styles";
 import { Text, View, TouchableOpacity, StatusBar, Image, FlatList,Pressable, StyleSheet, Dimensions } from "react-native";
 import axiosInstance from "../../services/APIService";
 import {useAppDispatch,useAppSelector} from '../redux/hooks'
-import {setorderId, setStateId,setUpdate,setSelectDoctorName,setDoctorExperience,setfee,setType, setOrderStatus, setSelectselectedDate } from "../redux/slices/login";
+import {setorderId, setStateId,setUpdate,setSelectDoctorName,setDoctorExperience,setfee,setType, setOrderStatus, setSelectselectedDate, setUserName, setVideoToken } from "../redux/slices/login";
 import { ScrollView } from "react-native-gesture-handler";
 import Spinner from 'react-native-loading-spinner-overlay';
 import Modal from "react-native-modal";
@@ -232,6 +232,13 @@ const BookDetail = ({ navigation }) => {
         dispatch(setSelectselectedDate(data['slot']))
         navigation.navigate('TimeSlots');      
       }
+    function joinVideo() {
+        dispatch(setorderId(orderid));
+        dispatch(setSelectDoctorName(data['doctorName']));
+        dispatch(setUserName(data['memberName']));
+        dispatch(setVideoToken(data['videoToken']));
+        navigation.navigate('joinVideo');
+    }
     function updateAppointmentConfirm(){
         const url = require('../../../assets/url.json');
         
@@ -383,11 +390,11 @@ const BookDetail = ({ navigation }) => {
                     </View>
                     <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
                             <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
-                                // onPress={()=>updateAppointment(item.orderId, item.doctorId)}
+                                 onPress={()=>joinVideo()}
                                 >
                         
                                     <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
-                                    {"Vedio"}
+                                    {"Video"}
                                     </Text>
                         
                             </TouchableOpacity>

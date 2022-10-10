@@ -16,7 +16,7 @@ import ManagefamilyMembers from '../components/ManageAccount/ManagefamilyMembers
 import AddMembers from '../components/ManageAccount/AddMembers'
 import Signup from '../components/LoginAuthentication/Signup'
 import BookingList from '../components/Booking/BookingList'
-
+import VideoCall from '../components/Booking/VideoCall'
 import BookDetail from '../components/Booking/BookDetail';
 import Login from '../components/LoginAuthentication/Login';
 import Icon from "react-native-vector-icons/Ionicons";
@@ -101,6 +101,8 @@ function ManageStackNav(){
             options={({route}) => ({headerTitle:'Please select slot',headerTitleAlign:'center'})}   />
                     <ManageStack.Screen name="Login" component={Login} 
             options={({route}) => ({headerTitle:'Login',headerTitleAlign:'center'})}   />
+            <ManageStack.Screen name="joinVideo" component={VideoCall} 
+            options={({route}) => ({headerTitle:'Video Call',headerTitleAlign:'center'})}   />
              {/* <HomeStack.Screen name="Details" component={HomeConsultation} 
             options={({route}) => ({headerTitle:'Doctor Details',headerTitleAlign:'center'})}   /> */}
 
