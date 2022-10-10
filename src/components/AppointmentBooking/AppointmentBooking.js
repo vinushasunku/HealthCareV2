@@ -187,6 +187,7 @@ const AppointmentBooking = ({ navigation }) => {
             navigation.navigate('Payment');
             setLoading(false);
         }).catch(error =>{
+            setLoading(false);
             console.log(error);
         })
     }

@@ -62,6 +62,7 @@ const TimeSlots = ({ navigation }) => {
                     const eveningdata=[];
                     for(let i = 0; i < response.data.length; i++)
                     {
+                        if(response.data[i].slotStatus === 'AVAILABLE'){
                         if(parseInt((response.data[i].slotTime.split(':')[0]).split(' ')[1]) <=12)
                         {
                             morningdata.push(response.data[i].slotTime.split(' ')[1])
@@ -73,6 +74,7 @@ const TimeSlots = ({ navigation }) => {
                         else if(parseInt((response.data[i].slotTime.split(':')[0]).split(' ')[1]) > 18){
                             eveningdata.push(response.data[i].slotTime.split(' ')[1])
                         }
+                    }
                        
                     }
                     setSelectedDay(time);
