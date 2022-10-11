@@ -16,7 +16,7 @@ const HomeConsultation = ({ navigation }) => {
     const loginid = useAppSelector(state => state.loginId.loginId);
     const [loading, setLoading] = React.useState(false);
     const type="Consultation";
-    const staticImage = require("../../Image/Medicines.png");
+    const staticImage = require("../../Image/Medicines.jpg");
     const labImage=require('../../../assets/Lab.jpg');
     const startLoading = () => {
         setLoading(!loading);

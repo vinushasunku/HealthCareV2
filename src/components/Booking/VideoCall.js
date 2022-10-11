@@ -5,6 +5,8 @@ import ZegoUIKitPrebuiltCall from '@zegocloud/zego-uikit-prebuilt-call-rn';
 import SafeAreaView from "react-native-safe-area-view";
 import {useAppSelector} from '../redux/hooks'
 
+//https://docs.zegocloud.com/article/14764
+
 const VideoCall = ({navigation}) => {
     const userInfo = {
         roomId: useAppSelector(state => state.loginId.orderId),
