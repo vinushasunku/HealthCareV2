@@ -1,6 +1,6 @@
 import React,{ useEffect, useCallback } from "react";
 import SafeAreaView from "react-native-safe-area-view";
-import { Text, View, StyleSheet, TextInput, Image, FlatList, ScrollView,KeyboardAvoidingView,StatusBar, TouchableOpacity, Dimensions } from "react-native";
+import { Text, View, StyleSheet, TextInput, Image, FlatList, ScrollView,KeyboardAvoidingView,StatusBar, TouchableOpacity, Dimensions,Pressable } from "react-native";
 const { width,height } = Dimensions.get('screen');
 //import { styles } from "../constants/styles";
 import { LogBox } from "react-native";
@@ -11,6 +11,8 @@ import axiosInstance from '../../services/APIService';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {useAppDispatch,useAppSelector} from '../redux/hooks'
 import {setsignupsuccessmessage} from '../redux/slices/login'
+import DatePicker from 'react-native-date-picker'
+
 // import CalendarPicker from 'react-native-calendar-picker';
 // import { MaskedTextInput} from "react-native-mask-text";
 // import { TextInputMask } from 'react-native-masked-text'
@@ -26,19 +28,16 @@ const Signup = ({ navigation }) => {
     const registerdata=['firstName','middleName','lastName','dob','gender','password','emailAddress','mobileNumber'];
     const [loading, setLoading] = React.useState(false);
     const [validationsuccess, setValidationstatus] = React.useState(false);
+    const [date, setDate] = React.useState(new Date())
     const dispatch = useAppDispatch();
     const startLoading = () => {
       setLoading(!loading);
-      // setTimeout(() => {
-      //   setLoading(false);
-      // }, 3000);
     };
     const gender = [
         { label: 'FEMALE', value: '1' },
         { label: 'MALE', value: '2' },
         { label: 'OTHER', value: '3' }
       ];
-
     function validatedata(formData){
       let count=0;
       if(formData['firstName'] === undefined || formData['firstName'] === '' || formData['firstName'] === null)
@@ -73,6 +72,25 @@ const Signup = ({ navigation }) => {
       }
       if(count == 0){
         setValidationstatus(true);
+        // if(validationsuccess === true)
+        // {
+          const url = require('../../../assets/url.json');
+          console.log(url.signup)
+          setLoading(true)
+          setContinueHidden(false)
+          axiosInstance.put(url.signup, formData).then(response => {
+            dispatch(setsignupsuccessmessage('true'));
+            setContinueHidden(true)
+            console.log('responsesignupdetail',response);
+            setLoading(false);
+            navigation.navigate('Login');
+        }).catch(error =>{
+          setContinueHidden(true)
+          setLoading(false);
+            console.log(error);
+        })
+          
+        // } 
       }
       else{
         setValidationstatus(true);
@@ -84,32 +102,15 @@ const Signup = ({ navigation }) => {
       {
         formData['middleName']=null
       }
+      console.log(formData)
       validatedata(formData);
       //validation for form
-      if(validationsuccess === true)
-      {
-        const url = require('../../../assets/url.json');
-        console.log(url.signup)
-        startLoading()
-        setContinueHidden(false)
-        axiosInstance.put(url.signup, formData).then(response => {
-          dispatch(setsignupsuccessmessage('true'));
-          setContinueHidden(true)
-          console.log('responsesignupdetail',response);
-          startLoading();
-          navigation.navigate('Login');
-      }).catch(error =>{
-        setContinueHidden(true)
-        startLoading();
-          console.log(error);
-      })
-        
-      }      
+     
     }, []);
 
     function onDateChange(date)
     {
-      const dateFormatted=(date.toISOString().slice(0,10)).replaceAll('-','/');
+      const dateFormatted=(date.toISOString().slice(0,10)).replace('-','/').replace('-','/');
       setselectedStartDate(dateFormatted)
       setValue('dob', dateFormatted);
       setHidden(false)
@@ -118,11 +119,15 @@ const Signup = ({ navigation }) => {
         name => text => {
                 if(name === 'dob')
                 {
-                  setHidden(true)
+                 // setHidden(true)
+                 setDatePickerVisibility(true);
                   setselectedStartDate(text);
                   setValue(name, text);
-                  setDatePickerVisibility(true);
                   validationMessage[name]['validate']="true" ;
+                }
+                else if(name === 'gender'){
+                  setValue(name, text);
+                  setGenderValue(text);
                 }
                 else{
                   setValue(name, text);
@@ -149,14 +154,19 @@ const Signup = ({ navigation }) => {
         )
     }
       useEffect(() => {
-        registerdata.map((item,index)=>( 
+        try{
+          registerdata.map((item,index)=>( 
             register(item) 
         ));
-       console.log(validationMessage["firstName"]["message"])
-      }, [validationMessage]);
+        }
+        catch(error){
+          console.log(error);
+        }
+
+      }, [isDatePickerVisible]);
 
       const hideDatePicker = () => {
-        setDatePickerVisibility(false);
+        setDatePickerVisibility(!isDatePickerVisible);
       };
     
       const handleConfirm = (date) => {
@@ -198,6 +208,7 @@ const Signup = ({ navigation }) => {
                 <Text style={[styles.textformat,styles.textColor,{ marginTop:15,fontWeight:'bold', marginRight:20, fontSize:15, paddingTop:5 }]}>
                     Date Of Birth
                 </Text>
+                <TouchableOpacity onPress={()=>{openDatePickerModel()}}>
                 <TextInput
                     placeholder="yyyy/mm/dd"
                     value={selectedStartDate}
@@ -205,20 +216,24 @@ const Signup = ({ navigation }) => {
                     onChangeText={onChangeField('dob')}
                     //onSubmitEditing={showDatePicker}
                 />
+                </TouchableOpacity>
                 </View>
                 {
                   validationMessage["dob"]["validate"] === false ? <Text style={[styles.validatetextcolor]}>{validationMessage["dob"]["message"]}</Text>: <Text></Text>
                 }
                 
                 {
-                  <DateTimePickerModal
-                  isVisible={true}
-                  mode="date"
-                  //onDateChange={(date)=>onDateChange(date)}
-                  onConfirm={handleConfirm}
-                  onCancel={hideDatePicker}
-                  />
+
                 
+                  <DatePicker
+                  modal
+                  open={isDatePickerVisible}
+                  date={date}
+                  mode="date"
+                   onDateChange={(date)=>onDateChange(date)}
+                   onConfirm={handleConfirm}
+                   onCancel={hideDatePicker}
+                />
                 /* <TextInputMask
                     type={'datetime'}
                     options={{
@@ -347,11 +362,7 @@ const Signup = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'rgb(214, 229, 243)'}}>
         <Spinner
-          //visibility of Overlay Loading Spinner
           visible={loading}
-          //Text with the Spinner
-         // textContent={'Loading...'}
-          //Text style of the Spinner Text
           textStyle={styles.spinnerTextStyle}
         />
         <ScrollView scrollEventThrottle={16} >

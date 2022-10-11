@@ -117,7 +117,7 @@ const AppointmentBooking = ({ navigation }) => {
                       <View style={[{color:'#eee',borderColor:"#eee", borderWidth:1, width:width-200, paddingRight:10, marginTop:5, marginBottom:5}]}>
                       </View>
                       {/* <ListItem.Subtitle style={{fontWeight:'300', paddingTop:5, fontSize:10}}>{doctorDetail.title}</ListItem.Subtitle> */}
-                      <ListItem.Subtitle style={[stylessheet.textformat,stylessheet.textColor]}>{experience} yrs of experience. overall</ListItem.Subtitle>
+                      <ListItem.Subtitle style={[stylessheet.textformat,stylessheet.textColor]}>{'Exp : '}{experience}</ListItem.Subtitle>
                       {/* <ListItem.Experience>{props.experience}</ListItem.Experience> */}
                       </ListItem.Content>                    
                   </ListItem>
