@@ -404,38 +404,6 @@ const BookDetail = ({ navigation }) => {
         </View>:<></>
             }
 
-<<<<<<< HEAD
-                    </View>
-
-
-                    <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
-                            <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
-                                onPress={()=>updateAppointment()}
-                                >
-                        
-                                    <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
-                                    {"Update"}
-                                    </Text>
-                        
-                            </TouchableOpacity>
-                        
-                    </View>
-                    <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
-                            <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
-                                 onPress={()=>joinVideo()}
-                                >
-                        
-                                    <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
-                                    {"Video"}
-                                    </Text>
-                        
-                            </TouchableOpacity>
-                        
-                    </View>
-                        
-            </View>
-=======
->>>>>>> b928b49713d63c0d86657d546a4703b2da01c3b0
         </View>
         )
 }
