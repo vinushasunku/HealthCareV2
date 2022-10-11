@@ -121,13 +121,14 @@ export const  styles = StyleSheet.create({
         borderColor:"#eee", 
         backgroundColor:"#eee",
         marginLeft:10, 
-        width:150,
         height:40,
         marginHorizontal: 10* 2.0, 
         marginTop: 10* 2.0,        
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 15,
+        paddingLeft: 5,
+        paddingRight: 5,
         marginBottom:10
     },
 

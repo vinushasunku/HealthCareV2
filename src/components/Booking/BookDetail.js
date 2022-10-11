@@ -120,7 +120,7 @@ const BookDetail = ({ navigation }) => {
                     <View style={{flexDirection:'row',paddingTop:20,paddingLeft:20}}>
                         <View style={{width:'40%'}}>
                             <Text style={[stylessheet.textformat,stylessheet.textColor, stylessheet.textsideheader]}>
-                                {'Doctor Name'}
+                                {'Name'}
                             </Text>
 
                         </View>
@@ -299,7 +299,7 @@ const BookDetail = ({ navigation }) => {
             }
             {
                 (data != undefined ||data != null ) && data["doctorName"] != null && data['type']  === 'CONSULTATION'?             <View style={{paddingTop:10,  paddingLeft:10}}>
-               <Text style={[StyleSheet.headerfontsize, stylessheet.textcolor,{ fontSize:20, fontWeight:'bold'}]}>
+               <Text style={[StyleSheet.headerfontsize, stylessheet.textColor,{ fontSize:20, fontWeight:'bold'}]}>
                   {"Doctor information"}
                </Text>
                 </View>

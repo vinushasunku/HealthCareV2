@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     },
     textformat:{
         fontSize:16,
-        lineHeight:22,
+        lineHeight:18,
         //letterSpacing:0,
         fontWeight:'500'
     },

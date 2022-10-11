@@ -62,17 +62,17 @@ const ManageAccount = ({ navigation }) => {
                   
             </View> */}
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', height:50, paddingTop:20}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', height:60, paddingTop:10}}>
                 <Ionicons name="person" size={24} style={{paddingLeft:10}} color="#2F4F4F" />
                 <TouchableOpacity 
                 style={{paddingLeft:10 }}
                 onPress={() => navigation.navigate('ManagefamilyMembers' ,{ loginid:loginid})}>
                                <View style={{flexDirection: 'row'}}>
                                <View style={{flexDirection: 'row', alignItems: 'center',width:'90%'}}>
-                                    <Text style={[stylessheet.textformat,stylessheet.textColor]}>Manage Family Members</Text>
+                                    <Text style={[stylessheet.textformat,stylessheet.textColor]}>Family Members</Text>
                                    
                                 </View>
-                                <View style={{alignItems:'center', paddingTop:5}}>
+                                <View style={{alignItems:'center', paddingTop:15}}>
                                    <SimpleLineIcons name="arrow-right"  size={10} color="#2F4F4F" />
                                 </View>
 
@@ -83,7 +83,7 @@ const ManageAccount = ({ navigation }) => {
             <View style={[styles.divider]}>
                   
             </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', height:50, paddingTop:20}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', height:60, paddingTop:10}}>
                 <Ionicons name="person" size={24} style={{paddingLeft:10}} color="#2F4F4F" />
                 <TouchableOpacity 
                 style={{paddingLeft:10 }}
@@ -93,7 +93,7 @@ const ManageAccount = ({ navigation }) => {
                                     <Text style={[stylessheet.textformat,stylessheet.textColor]}>Booking</Text>
                                    
                                 </View>
-                                <View style={{alignItems:'center', paddingTop:5}}>
+                                <View style={{alignItems:'center', paddingTop:15}}>
                                    <SimpleLineIcons name="arrow-right"  size={10} color="#2F4F4F" />
                                 </View>
                                </View>
@@ -102,7 +102,7 @@ const ManageAccount = ({ navigation }) => {
             <View style={[styles.divider]}>
                   
             </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', height:50, paddingTop:20}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', height:60, paddingTop:10}}>
                 <Ionicons name="person" size={24} style={{paddingLeft:10}} color="#2F4F4F" />
                 <TouchableOpacity 
                 style={{paddingLeft:10 }}

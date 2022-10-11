@@ -149,7 +149,7 @@ const LabSearch = ({ navigation }) => {
                               
                             </View>
                             <View>
-                                <SimpleLineIcons name="arrow-right" size={10} color="black"  />
+                                <SimpleLineIcons name="arrow-right" size={10} style={{paddingTop:20}} color="black"  />
                             </View>
                             </View>
 
@@ -241,9 +241,6 @@ const LabSearch = ({ navigation }) => {
                    <Text style={[stylessheet.textformat, stylessheet.textColor,stylessheet.headerfontsize]}>{"Search In Medicines"}</Text>
                 </View>
                 {MedicianList()} */}
-                <View style={{width:width-60,height:40,backgroundColor:'#ccccff', marginLeft:20, paddingTop:10,paddingLeft:10}}>
-                   <Text style={[stylessheet.textformat, stylessheet.textColor,stylessheet.headerfontsize]}>{"In Lab Tests"}</Text>
-                </View>
                 {labList()}
               
             </View>

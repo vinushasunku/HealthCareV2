@@ -23,8 +23,8 @@ const DoctorDetail=({ navigation }) =>{
                     <Avatar source={{ uri: doctorDetail.image}} style={styles.imageSize} rounded />
                     <ListItem.Content>
                     <ListItem.Title style={{fontWeight:'bold'}}>{doctorDetail.name}</ListItem.Title>
-                    <ListItem.Subtitle style={{fontWeight:'300', paddingTop:5, fontSize:10}}>{doctorDetail.title}</ListItem.Subtitle>
-                    <ListItem.Subtitle style={{fontWeight:'300', paddingTop:5,fontSize:10}}>{doctorDetail.experience} yrs of experience. overall</ListItem.Subtitle>
+                    <ListItem.Subtitle style={{fontWeight:'300', paddingTop:5, fontSize:10}}>Dr. {doctorDetail.title}</ListItem.Subtitle>
+                    <ListItem.Subtitle style={{fontWeight:'300', paddingTop:5,fontSize:10}}> Exp: {doctorDetail.experience} years</ListItem.Subtitle>
                     {/* <ListItem.Experience>{props.experience}</ListItem.Experience> */}
                     </ListItem.Content>
                     <ListItem.Chevron />
@@ -34,7 +34,7 @@ const DoctorDetail=({ navigation }) =>{
                     <ListItem.Content>
                         <View style={{flexDirection:"row" ,backgroundColor:"#e5cce5", width:width-30,height:55}}>
                                 <Text style={{paddingTop:18, paddingLeft:10}}>
-                                    Vedio Consultation
+                                    Video Consultation
                                 </Text>
                                 <Text style={{paddingTop:18, paddingLeft:160}}>
                                     Rs 500 fee

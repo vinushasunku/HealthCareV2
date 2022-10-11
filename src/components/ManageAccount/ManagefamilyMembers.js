@@ -126,7 +126,7 @@ const ManagefamilyMembers = ({ navigation }) => {
                     style={[stylessheet.buttonstylecss]}
                     onPress={() => navigation.navigate('AddMembers')} >
                                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                        <Text style={[stylessheet.textformat,{color:'white'}]}>Add Members</Text>
+                                        <Text style={[stylessheet.buttonTextformat,{color:'white'}]}>Add Members</Text>
                                     </View>
                                 
                     </TouchableOpacity>
@@ -153,6 +153,12 @@ const stylessheet = StyleSheet.create({
     textformat:{
         fontSize:16,
         lineHeight:22,
+        //letterSpacing:0,
+        fontWeight:'500'
+    },
+    buttonTextformat:{
+        fontSize:16,
+        lineHeight:16,
         //letterSpacing:0,
         fontWeight:'500'
     },

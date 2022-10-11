@@ -131,15 +131,16 @@ const LabDetail = ({ navigation }) => {
            testDetails.map((item,index)=>(
 
             <View key={index} style={{borderRadius:10, borderWidth:1,borderColor:'#eee', backgroundColor:'white', paddingTop:10}}>
+             <TouchableOpacity onPress={()=> collapsiable(item.testGroupName)} >
             <View style={{flexDirection:'row', paddingTop:10,paddingLeft:15, paddingBottom:10}}>
                 <View style={{width:'90%'}}>
                     <View style={{flexDirection:'row'}}>
                     <Fontisto name="blood-test" size={24} color="#f93"/> 
-                    <Text style={[stylessheet.textColor, stylessheet.textformat,stylessheet.headerfontsize,{paddingLeft:15}]}>{"Tests Include ("+ item.testGroupName+")"}</Text>
+                    <Text style={[stylessheet.textColor, stylessheet.textformat,stylessheet.headerfontsize,{paddingLeft:15}]}>{ item.testGroupName}</Text>
                     </View>
 
 
-                    <Text style={[stylessheet.textColor,stylessheet.headerfontsize,{paddingLeft:15, paddingTop:10, }]}>{"Total Tests Include ("+ item["tests"].length+")"}</Text>
+                    <Text style={[stylessheet.textColor,stylessheet.headerfontsize,{paddingLeft:15, paddingTop:10, }]}>{item["tests"].length+" tests"}</Text>
                 </View>
                 <View>
                     <TouchableOpacity onPress={()=> collapsiable(item.testGroupName)} >
@@ -151,6 +152,7 @@ const LabDetail = ({ navigation }) => {
 
 
             </View>
+            </TouchableOpacity>
             <View style={{height:testGroupNameselected === item.testGroupName ? 100:0}}>
                 <View style={{borderBottomWidth:1, borderBottomColor:'#eee'}}>
 
@@ -209,7 +211,7 @@ const LabDetail = ({ navigation }) => {
                               <View>
                               <TouchableOpacity onPress={() => BookingSlot()}>
                                   <View style={[styles.buttonBookingStyle, {backgroundColor:'#337ab7'}]}>
-                                      <Text style={[stylessheet.textformat,{  color: '#FFFFFF' }]}>{'Continue'}</Text>
+                                      <Text style={[stylessheet.textformat,{  color: '#FFFFFF' }]}>{'Book'}</Text>
                                   </View>
                               </TouchableOpacity>
                               </View>

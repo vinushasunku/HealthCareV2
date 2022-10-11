@@ -344,7 +344,7 @@ const Signup = ({ navigation }) => {
                 >
 
                         <Text style={[styles.textformat]}>
-                            {'Sign in'}
+                            {'Sign up'}
                         </Text>
                 </TouchableOpacity>
             </View>
@@ -396,7 +396,8 @@ const styles = StyleSheet.create({
       borderBottomColor: 'gray',
       borderBottomWidth:2, 
       borderBottomColor:'#2F4F4F',
-      color:"#2F4F4F"
+      baseColor:"rgba(255, 255, 255, 1)",
+      color:"black"
     },
     icon: {
       marginRight: 5,
