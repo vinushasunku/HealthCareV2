@@ -24,13 +24,20 @@ const Login = ({ navigation }) => {
     const successmessage= useAppSelector(state =>state.loginId.signupsuccessmessage);
     const [loading, setLoading] = React.useState(false);
 
+
     const startLoading = () => {
       setLoading(!loading);
     };
     React.useEffect(() => {
-        const url=require('../../../assets/doctor.jpg');
-        setImageurl(url);
-        console.log(successmessage)
+        try{
+            const url=require('../../../assets/doctor.jpg');
+            setImageurl(url);
+            console.log(successmessage)
+        }
+        catch(error){
+            console.log(error)
+        }
+
     })
 
     function validation(phoneNumber)
@@ -47,38 +54,43 @@ const Login = ({ navigation }) => {
     }
     function login()
     {
-        if(passwordinput === '' || emailinput === '' )
-        {
-           shake()
+        try{
+            if(passwordinput === '' || emailinput === '' )
+            {
+               shake()
+            }
+            else{
+                const url = require('../../../assets/url.json');
+                const data=new loginModel(emailinput, passwordinput);  
+                startLoading();   
+                axiosInstance.post(url.loginurl, data).then(response => {
+                    setLoading(false);
+                    console.log('responselogindetail',response.statuscode);
+                    dispatch(setLoginId(response.data["id"]));
+                    // if(Platform.OS != 'web')
+                    // {
+                    //     setLoading(false);
+                    //     navigation.navigate('BottomTabs', {
+                    //         loginid:response.data["id"]
+                    //     });
+        
+                    // }
+                    // else{
+                    //     setLoading(false);
+                    //     navigation.navigate('SearchInfo', {
+                    //         loginid:response.data["id"]
+                    //     });
+                    // }
+        
+                }).catch(error =>{
+                    shake();
+                    setLoading(false);
+                    console.log(error);
+                })
+            }
         }
-        else{
-            const url = require('../../../assets/url.json');
-            const data=new loginModel(emailinput, passwordinput);  
-            startLoading();   
-            axiosInstance.post(url.loginurl, data).then(response => {
-                setLoading(false);
-                console.log('responselogindetail',response.statuscode);
-                dispatch(setLoginId(response.data["id"]));
-                // if(Platform.OS != 'web')
-                // {
-                //     setLoading(false);
-                //     navigation.navigate('BottomTabs', {
-                //         loginid:response.data["id"]
-                //     });
-    
-                // }
-                // else{
-                //     setLoading(false);
-                //     navigation.navigate('SearchInfo', {
-                //         loginid:response.data["id"]
-                //     });
-                // }
-    
-            }).catch(error =>{
-                shake();
-                setLoading(false);
-                console.log(error);
-            })
+        catch(error){
+            console.log(error);
         }
 
       

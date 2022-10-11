@@ -342,7 +342,7 @@ const BookingList = ({ navigation }) => {
 
                                         <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom:10 }}>
                                             {/* <View style={{  marginTop: 3,paddingLeft:10 , paddingTop:30}}>
-                                                        <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20, width:100, height:30, marginLeft:10}}
+                                                        <acity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20, width:100, height:30, marginLeft:10}}
                                                         onPress={()=>cancelAppointment(item.orderId)}
                                                         >
                         

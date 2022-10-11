@@ -25,6 +25,7 @@
     "react-native-base64": "^0.2.1",
     "react-native-calendar-picker": "^7.1.2",
     "react-native-calendar-strip": "^2.2.6",
+    "react-native-date-picker": "^4.2.5",
     "react-native-element-dropdown": "^2.3.0",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "^2.7.0",

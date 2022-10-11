@@ -142,8 +142,8 @@ const DoctorProfile = ({ navigation }) => {
                             </ListItem.Title>
                             <View style={[{borderWidth:1, width:platformtype === true? width-200 : width/4, borderColor:"#eee", marginTop:5}]}>
                             </View>
-                            <ListItem.Subtitle style={[stylessheet.textcolor,stylessheet.textformat,{ paddingTop:5}]}>{new Date().getFullYear() -doctorAccountInfo.practicingFrom} yrs of experience. overall</ListItem.Subtitle>
-                            <ListItem.Subtitle style={[stylessheet.textcolor,stylessheet.textformat,{ paddingTop:5}]}> { "Consultation fee : "+doctorAccountInfo.consultationFee}
+                            <ListItem.Subtitle style={[stylessheet.textcolor,stylessheet.textformat,{ paddingTop:5}]}>{'Exp : '}{new Date().getFullYear() -doctorAccountInfo.practicingFrom}</ListItem.Subtitle>
+                            <ListItem.Subtitle style={[stylessheet.textcolor,stylessheet.textformat,{ paddingTop:5}]}> { "Fee : "+doctorAccountInfo.consultationFee}
                             </ListItem.Subtitle>
                             </ListItem.Content>   
                                              

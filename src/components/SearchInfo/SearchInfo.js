@@ -143,8 +143,12 @@ const SearchInfo = ({ navigation }) => {
                             }}>
                     <View style={{ flexDirection: 'row'}}>
                         {/* <Ionicons name="person-circle-outline" size={160} color="#337ab7" /> */}
-                        <Avatar rounded source={profileImage}  style={{height:100 ,borderRadius:100/2, width: 100,paddingLeft:20,paddingTop:10,  marginRight:20,borderWidth:1, borderColor:"#eee" }}  />
-                        
+                        {/* <Avatar rounded source={profileImage}  style={{height:100 ,borderRadius:100/2, width: 100,paddingLeft:20,paddingTop:10,  marginRight:20,borderWidth:1, borderColor:"#eee" }}  /> */}
+                        <View style={styles.doctorImageContainerStyle}>
+                                    <Avatar source={profileImage} style={{height:110 , width: 110, borderRadius: 75.0,overflow: 'hidden'}} rounded />
+                                {/* <Avatar rounded source={profileImage}  style={{height:100 ,borderRadius:100/2, width: 100,paddingLeft:20,paddingTop:10,  marginRight:20,borderWidth:1, borderColor:"#eee" }}  /> */}
+
+                        </View>
                         <View>
                         <TouchableOpacity onPress={() => selectDoctor(item.id,'Doctor',profileImage)}>
                             <View style={{paddingTop:20}}>

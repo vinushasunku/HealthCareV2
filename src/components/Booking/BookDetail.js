@@ -353,48 +353,50 @@ const BookDetail = ({ navigation }) => {
                 </Modal>
 
             </View>
+            {
+                (data != undefined ||data != null ) && data["status"] != 'CANCELLED' ?             <View style={{ marginTop: 3,height:'10%', backgroundColor:'#ffffff', flexDirection:'row'}}>
+                <View style={{paddingLeft:10 ,width:'33%',marginTop:10}}>
+                    <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
+                        onPress={()=>cancelAppointment()}
+                    >
+                        
+                        <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
+                            {"Cancel"}
+                        </Text>
+                        
+                    </TouchableOpacity>
 
-            <View style={{ marginTop: 3,height:'10%', backgroundColor:'#ffffff', flexDirection:'row'}}>
-                    <View style={{paddingLeft:10 ,width:'33%',marginTop:10}}>
+                </View>
+
+
+                <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
                         <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
-                            onPress={()=>cancelAppointment()}
-                        >
-                            
-                            <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
-                                {"Cancel"}
-                            </Text>
-                            
+                            onPress={()=>updateAppointment()}
+                            >
+                    
+                                <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
+                                {"Update"}
+                                </Text>
+                    
                         </TouchableOpacity>
+                    
+                </View>
+                <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
+                        <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
+                            // onPress={()=>updateAppointment(item.orderId, item.doctorId)}
+                            >
+                    
+                                <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
+                                {"Vedio"}
+                                </Text>
+                    
+                        </TouchableOpacity>
+                    
+                </View>
+                    
+        </View>:<></>
+            }
 
-                    </View>
-
-
-                    <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
-                            <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
-                                onPress={()=>updateAppointment()}
-                                >
-                        
-                                    <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
-                                    {"Update"}
-                                    </Text>
-                        
-                            </TouchableOpacity>
-                        
-                    </View>
-                    <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
-                            <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
-                                // onPress={()=>updateAppointment(item.orderId, item.doctorId)}
-                                >
-                        
-                                    <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
-                                    {"Vedio"}
-                                    </Text>
-                        
-                            </TouchableOpacity>
-                        
-                    </View>
-                        
-            </View>
         </View>
         )
 }

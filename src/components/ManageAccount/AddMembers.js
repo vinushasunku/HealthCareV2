@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import { Text, View,TextInput, Button,Image, StatusBar, FlatList, KeyboardAvoidingView,TouchableOpacity, StyleSheet,ScrollView,Dimensions } from "react-native";
+import { Text, View,TextInput, Button,Image, StatusBar, FlatList, KeyboardAvoidingView,TouchableOpacity, StyleSheet,ScrollView,Dimensions, Pressable } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 const { width, height } = Dimensions.get('screen');
 import { useForm } from 'react-hook-form';
@@ -8,10 +8,12 @@ import { Dropdown } from 'react-native-element-dropdown';
 LogBox.ignoreLogs(["EventEmitter.removeListener"]);
 //import CalendarPicker from 'react-native-calendar-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+
 import {useAppDispatch,useAppSelector} from '../redux/hooks'
 import { setStateId } from "../redux/slices/login";
 import Spinner from 'react-native-loading-spinner-overlay';
 import axiosInstance from "../../services/APIService";
+import DatePicker from 'react-native-date-picker'
 const AddMembers = ({ navigation }) => {
     const { register, handleSubmit, setValue } = useForm();
     const [value, setGenderValue] = React.useState(null);
@@ -21,6 +23,8 @@ const AddMembers = ({ navigation }) => {
     const [isHidden, setHidden] = React.useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
+    const [date, setDate] = React.useState(new Date())
+    const [open, setOpen] = React.useState(false)
     const dispatch = useAppDispatch();
     const showDatePicker = () => {
       setDatePickerVisibility(true);
@@ -51,12 +55,15 @@ const AddMembers = ({ navigation }) => {
       ];
     const onSubmit = useCallback(formData => {
       const url = require('../../../assets/url.json');
+      setLoading(true);
       axiosInstance.post(url.addmember, formData).then(response => {
         console.log('responsesignupdetail' +response.data);
         dispatch(setStateId(1));
+        setLoading(false);
         navigation.navigate('ManagefamilyMembers')
     }).catch(error =>{
         console.log(error);
+        setLoading(false);
     })
   
       
@@ -77,7 +84,7 @@ const AddMembers = ({ navigation }) => {
       );
       function onDateChange(date)
       {
-        console.log(new Date(date).toISOString().slice(0,10).toString().replace('-','/').replace('-','/'))
+        // console.log(new Date(date).toISOString().slice(0,10).toString().replace('-','/').replace('-','/'))
         const dateFormatted=(date.toISOString().slice(0,10)).replace('-','/').replace('-','/');
         setselectedStartDate(dateFormatted)
         setValue('dob', dateFormatted);
@@ -116,6 +123,7 @@ const AddMembers = ({ navigation }) => {
                 <Text style={[styles.textformat,{ marginTop:15,fontWeight:'bold', marginRight:20,color:"#2F4F4F", fontSize:15, paddingTop:5 }]}>
                     Date Of Birth
                 </Text>
+                <Pressable onPress={()=>hideDatePicker()}>
                 <TextInput
                     placeholder="yyyy/mm/dd"
                     value={selectedStartDate}
@@ -123,17 +131,29 @@ const AddMembers = ({ navigation }) => {
                     onChangeText={onChangeField('dob')}
                     //onSubmitEditing={showDatePicker}
                 />
+                </Pressable>
+
 
                 </View>
 
                 {
-                  <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  mode="date"
-                  //onDateChange={(date)=>onDateChange(date)}
-                  onConfirm={handleConfirm}
-                  onCancel={hideDatePicker}
-                  />
+
+                         <DatePicker
+                         modal
+                         open={isDatePickerVisible}
+                         date={date}
+                         mode="date"
+                          onDateChange={(date)=>onDateChange(date)}
+                          onConfirm={handleConfirm}
+                          onCancel={hideDatePicker}
+                       />
+                  // <DateTimePickerModal
+                  // isVisible={open}
+                  // mode="date"
+                  // onDateChange={(date)=>onDateChange(date)}
+                  // onConfirm={handleConfirm}
+                  // onCancel={hideDatePicker}
+                  // />
                 }
                  <View style={{ flexDirection: 'row', alignItems: 'center', width:width }}>
                     <Text style={[styles.label,  { color: 'blue', marginRight:40,color:"#2F4F4F", fontSize:13, fontWeight:'600' }]}>
@@ -216,6 +236,10 @@ const AddMembers = ({ navigation }) => {
 
     return (
          <View style={{backgroundColor:'#F5F5F5', marginTop:10, marginLeft:10, marginRight:10}}>
+          <Spinner
+          visible={loading}
+          textStyle={styles.spinnerTextStyle}
+        />
            <ScrollView >
               <KeyboardAvoidingView behavior="padding">
               {familyDetails()} 
