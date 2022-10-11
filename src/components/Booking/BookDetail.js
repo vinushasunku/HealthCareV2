@@ -233,6 +233,7 @@ const BookDetail = ({ navigation }) => {
         navigation.navigate('TimeSlots');      
       }
     function joinVideo() {
+        console.log('token'+data['videoToken'])
         dispatch(setorderId(orderid));
         dispatch(setSelectDoctorName(data['doctorName']));
         dispatch(setUserName(data['memberName']));
@@ -388,54 +389,26 @@ const BookDetail = ({ navigation }) => {
                         </TouchableOpacity>
                     
                 </View>
-                <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
-                        <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
-                            onPress={()=>joinVideo()}
-                            >
-                    
-                                <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
-                                {"Video"}
-                                </Text>
-                    
-                        </TouchableOpacity>
-                    
-                </View>
+                {
+                    (data != undefined ||data != null ) && data["videoToken"] != null ?  
+                    <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
+                    <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
+                        onPress={()=>joinVideo()}
+                        >
+                
+                            <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
+                            {"Video"}
+                            </Text>
+                
+                    </TouchableOpacity>
+                
+            </View>:<></>
+                }
+
                     
         </View>:<></>
             }
 
-<<<<<<< HEAD
-                    </View>
-
-
-                    <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
-                            <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
-                                onPress={()=>updateAppointment()}
-                                >
-                        
-                                    <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
-                                    {"Update"}
-                                    </Text>
-                        
-                            </TouchableOpacity>
-                        
-                    </View>
-                    <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
-                            <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
-                                 onPress={()=>joinVideo()}
-                                >
-                        
-                                    <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
-                                    {"Video"}
-                                    </Text>
-                        
-                            </TouchableOpacity>
-                        
-                    </View>
-                        
-            </View>
-=======
->>>>>>> b928b49713d63c0d86657d546a4703b2da01c3b0
         </View>
         )
 }
