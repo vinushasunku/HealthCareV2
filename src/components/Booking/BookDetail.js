@@ -233,6 +233,7 @@ const BookDetail = ({ navigation }) => {
         navigation.navigate('TimeSlots');      
       }
     function joinVideo() {
+        console.log('token'+data['videoToken'])
         dispatch(setorderId(orderid));
         dispatch(setSelectDoctorName(data['doctorName']));
         dispatch(setUserName(data['memberName']));
@@ -388,18 +389,22 @@ const BookDetail = ({ navigation }) => {
                         </TouchableOpacity>
                     
                 </View>
-                <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
-                        <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
-                            onPress={()=>joinVideo()}
-                            >
-                    
-                                <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
-                                {"Video"}
-                                </Text>
-                    
-                        </TouchableOpacity>
-                    
-                </View>
+                {
+                    (data != undefined ||data != null ) && data["videoToken"] != null ?  
+                    <View style={{paddingLeft:10 , width:'33%',marginTop:10}}>
+                    <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
+                        onPress={()=>joinVideo()}
+                        >
+                
+                            <Text style={{alignItems:'center', paddingTop:10,color:'#ffff' }}>
+                            {"Video"}
+                            </Text>
+                
+                    </TouchableOpacity>
+                
+            </View>:<></>
+                }
+
                     
         </View>:<></>
             }
