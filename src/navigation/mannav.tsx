@@ -56,7 +56,7 @@ function HomeStackNav(){
                         <TestStack.Screen name="LabDetail" component={LabDetail} 
             options={({route}) => ({headerTitle:'Test package detail',headerBackTitle:'Back', headerTitleAlign:'center'})}   />
             <TestStack.Screen name="FamilyMember" component={FamilyMember} 
-            options={({route}) => ({headerTitle:'Select family member and slots',headerBackTitle:'Back',headerTitleAlign:'center'})}   />
+            options={({route}) => ({headerTitle:'Book Tests',headerBackTitle:'Back',headerTitleAlign:'center'})}   />
         </HomeStack.Navigator>
     )
 
@@ -120,7 +120,7 @@ function TestStackNav(){
             <TestStack.Screen name="LabDetail" component={LabDetail} 
             options={({route}) => ({headerTitle:'Test package detail',headerBackTitle:'Back', headerTitleAlign:'center'})}   />
             <TestStack.Screen name="FamilyMember" component={FamilyMember} 
-            options={({route}) => ({headerTitle:'Select family member and slots',headerBackTitle:'Back',headerTitleAlign:'center'})}   />
+            options={({route}) => ({headerTitle:'Book Tests',headerBackTitle:'Back',headerTitleAlign:'center'})}   />
             <TestStack.Screen name="Payment" component={Payment} 
             options={({route}) => ({headerTitle:'Payment details',headerTitleAlign:'center'})}   />
              {/* <HomeStack.Screen name="Details" component={HomeConsultation} 

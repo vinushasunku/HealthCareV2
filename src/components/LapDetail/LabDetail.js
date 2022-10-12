@@ -9,7 +9,7 @@ import axiosInstance from '../../services/APIService'
 import Spinner from 'react-native-loading-spinner-overlay';
 import moment from 'moment'; 
 import {useAppDispatch,useAppSelector} from '../redux/hooks'
-
+import {setfee } from "../redux/slices/login";
 
 import AntDesign  from 'react-native-vector-icons/AntDesign'; 
 const { width, height } = Dimensions.get('screen');
@@ -33,7 +33,7 @@ const LabDetail = ({ navigation }) => {
     const [selectmemberid, setselectmemberid] = React.useState('');
     const [selectedmembername, setselelctedmember] = React.useState('');
     let datesBlacklist = moment() ;
-
+    const dispatch = useAppDispatch();
 
     function BookingSlot(){
         navigation.navigate('FamilyMember')
@@ -59,6 +59,7 @@ const LabDetail = ({ navigation }) => {
                 settestDetailInfo(response.data);
                 settestDetails(response.data["testDetails"])
                 setLoading(false);
+                dispatch(setfee(response.data.currentFee));
                 // setFilteredLabDataSource(response.data["summary"]);
             }
         }).catch(error =>{

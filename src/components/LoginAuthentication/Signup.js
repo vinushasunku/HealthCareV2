@@ -12,6 +12,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {useAppDispatch,useAppSelector} from '../redux/hooks'
 import {setsignupsuccessmessage} from '../redux/slices/login'
 import DatePicker from 'react-native-date-picker'
+import { textColor } from "../constants/styles";
 
 // import CalendarPicker from 'react-native-calendar-picker';
 // import { MaskedTextInput} from "react-native-mask-text";
@@ -211,6 +212,7 @@ const Signup = ({ navigation }) => {
                 <TouchableOpacity onPress={()=>{openDatePickerModel()}}>
                 <TextInput
                     placeholder="yyyy/mm/dd"
+                    placeholderTextColor="black" 
                     value={selectedStartDate}
                     style={[styles.textformat,styles.textColor,{width:width/2, height:60, borderRadius:1,borderBottomWidth:2, borderBottomColor:'#2F4F4F'}]}
                     onChangeText={onChangeField('dob')}
@@ -275,12 +277,14 @@ const Signup = ({ navigation }) => {
                      Gender
                     </Text>
                     <Dropdown
-                            style={styles.dropdown}
+                            style={[styles.dropdown]}
                             placeholderStyle={styles.placeholderStyle}
                             selectedTextStyle={styles.selectedTextStyle}
                             inputSearchStyle={styles.inputSearchStyle}
                             iconStyle={styles.iconStyle}
-                            
+                            //itemTextStyle={{textColor:'blue'}}
+                            itemTextStyle={{fontWeight:'600', color:'black'}}
+                            textColor="black"
                             data={gender}
                             //search
                             maxHeight={300}
@@ -292,9 +296,6 @@ const Signup = ({ navigation }) => {
                             onChange={item => {
                                 setValue('gender',item.label);
                             }}
-                            // renderLeftIcon={() => (
-                            // <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
-                            // )}
                         />
                  </View>
                  {

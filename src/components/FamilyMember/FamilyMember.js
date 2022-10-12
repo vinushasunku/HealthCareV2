@@ -10,6 +10,8 @@ import moment from 'moment';
 import {setorderId } from "../redux/slices/login";
 import Spinner from 'react-native-loading-spinner-overlay';
 import CalendarStrip from 'react-native-calendar-strip';
+import { Dropdown } from 'react-native-element-dropdown';
+import DatePicker from 'react-native-date-picker'
 const { width,height } = Dimensions.get('screen');
 
 const FamilyMember = ({ navigation }) => {
@@ -26,8 +28,14 @@ const FamilyMember = ({ navigation }) => {
     const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
     const [modalMemberVisible, setModalMemberVisible] = React.useState(false);
     const [modalDateVisible, setModalDateVisible] = React.useState(false);
+    const [familymemberdrpdowns, setdropdownlist] = React.useState([]);
+    const [value, setselectedFMValue] = React.useState(null);
+    const [date, setDate] = React.useState(new Date())
     const dispatch = useAppDispatch();
+    const lastWeek = new Date();
+    lastWeek.setDate(lastWeek.getDate() + 7);
     let datesBlacklist = moment() ;
+
     function changecolor(id, fn,mn,ln)
     {
        
@@ -50,11 +58,16 @@ const FamilyMember = ({ navigation }) => {
     }
     function onDateChange(date)
     {
-      const dateFormatted=(date.toISOString().slice(0,10)).replaceAll('-','/');
-      setselectedStartDate(dateFormatted)
+      const dateFormatted=(date.toISOString().slice(0,10)).replace('-','/').replace('-','/');
+      setSelectedDay(dateFormatted)
     }
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
+      };
+      const handleConfirm = (date) => {
+        console.warn("A date has been picked: ", date);
+        onDateChange(date);
+        hideDatePicker();
       };
 
       React.useEffect(() => {
@@ -63,15 +76,22 @@ const FamilyMember = ({ navigation }) => {
             setplatformtype(true)
         }
         const url = require('../../../assets/url.json');
-        console.log('labid'+labID)
         setLoading(true);
 
 
         axiosInstance.get(url.getManageAccount+loginid).then(response => {
             if( response != null &&response.data != null && response.data['familyMembers'].length >0)
-            {    setLoading(false);       
+            {    setLoading(false); 
                 setFamilyMembers(response.data['familyMembers']);
-                console.log(familyMembersdetail);
+                for(let i=0;i<=response.data['familyMembers'].length;i++){
+                    const data=response.data['familyMembers'][i];
+                    const label={label:  "member", value: "name" }
+                   // console.log(data["firstName"] +data["lastName"]+ data["memberId"])
+                   if(data != null &&(data["memberId"] != undefined || data["memberId"] != null || data["memberId"] != '')){
+                    familymemberdrpdowns.push({label: data["firstName"] +' '+data["lastName"]  , value: data["memberId"]})
+                   }
+
+                }
             }
         }).catch(error =>{
             setLoading(true); 
@@ -95,12 +115,16 @@ const FamilyMember = ({ navigation }) => {
             "itemIds" : [labID],
             "slotTime" : selectedDate
         };
+        console.log(data)
+        setLoading(true);
         axiosInstance.post(url.commonurl+loginid+'/initiateOrder',data).then(response => {
             console.log('responselogindetail',response.data);
             dispatch(setorderId(response.data))
             navigation.navigate('Payment');
+            setLoading(false);
         }).catch(error =>{
             console.log(error);
+            setLoading(false);
         })
     }
 
@@ -161,9 +185,22 @@ const FamilyMember = ({ navigation }) => {
                             //onSubmitEditing={showDatePicker}
                         />
                 </View>
+                {
+                    <DatePicker
+                        modal
+                        open={isDatePickerVisible}
+                        date={date}
+                        mode="date"
+                        onDateChange={(date)=>onDateChange(date)}
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
+                        // maximumDate={new Date()}
+                        // minimumDate={lastWeek}
+                    />
+                }
                 <View >
                    <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20, width:'150%',  height:30,marginTop:25, marginLeft:10,}}
-                                 onPress={()=>setModalDateVisible(!modalDateVisible)}
+                                 onPress={()=>setDatePickerVisibility(!isDatePickerVisible)}
                                 >
         
                                             <Text style={{alignItems:'center', paddingTop:5,color:'#ffff' }}>
@@ -193,7 +230,7 @@ const FamilyMember = ({ navigation }) => {
     return(
        <View style={{flexDirection:'row',borderRadius:10, borderWidth:1,borderColor:'#eee', backgroundColor:'white', marginTop:20, height:'50%', paddingBottom:20, paddingLeft:15}}>
         {/* <View style={{flexDirection:'row',paddingTop:30, paddingLeft:15}}> */}
-            <View style={{width:width/2, paddingTop:15,}}>
+            {/* <View style={{width:width/2, paddingTop:15,}}>
                 <TextInput
                         placeholder="Select family member"
                         placeholderTextColor={'#D3D3D3'}
@@ -214,24 +251,81 @@ const FamilyMember = ({ navigation }) => {
                                         </Text>
     
                 </TouchableOpacity>
-            </View>
+            </View> */}
+            <View style={{ flexDirection: 'row', alignItems: 'center', width:width }}>
+                    <Text style={[styles.textformat, styles.textColor,{fontWeight:'bold', paddingRight:20}]}>
+                     {"Family Member"}
+                    </Text>
+                    <Dropdown
+                            style={{width:'50%',color:'black',   borderBottomColor: 'gray',
+                            borderBottomWidth:2, 
+                            borderBottomColor:'#2F4F4F',
+                            }}
+                            selectedTextProps={{
+                                style: {
+                                  fontSize: 20, 
+                                color: 'black',
+                                },
+                            }}
+                            selectedTextStyle={{
+                              fontSize: 13,
+                              color: 'black',
+                            }}
+                            itemTextStyle={{fontWeight:'600', color:'black'}}
+                            textColor="black"
+                            placeholderStyle={styles.placeholderStyle}
+                            //selectedTextStyle={styles.selectedTextStyle}
+                            inputSearchStyle={styles.inputSearchStyle}
+                            iconStyle={styles.iconStyle}
+                            data={familymemberdrpdowns}
+                            //search
+                            maxHeight={300}
+                            labelField="label"
+                            valueField="value"
+                            placeholder="Select item"
+                            searchPlaceholder="Search..."
+                            value={value}
+                            onChange={item => {
+                                setselectmemberid(item.value);
+                            }}
+                        />
+                 </View>
        </View>
     )
    }
    function familyMemberList(){
     return(
-      familyMembersdetail.length >0 ? familyMembersdetail.map((item,index)=>(
-        //    <View key={index} style={{flexDirection:'row',marginTop:10,alignItems:'center' }}>
-                <TouchableOpacity key={index}  style={{backgroundColor:selectmembercolor === item.memberId?'#ccccff':'#eee', marginTop:10,width:300, height:40,paddingHorizontal:5*10, paddingTop:10}}
-                    onPress={()=>changecolor(item.memberId,item.firstName,item.middleName ,item.lastName )}
-                    >
-                        <Text style={{ textTransform:'uppercase',color:'#2F4F4F', fontWeight:'600',fontSize:16 }}>{item.firstName +" "+(item.middleName != null ?item.middleName :"")+" "+ item.lastName }</Text>  
-                </TouchableOpacity>      
+        <Dropdown
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        
+        data={familymemberdrpdowns}
+        //search
+        maxHeight={300}
+        labelField="label"
+        valueField="value"
+        placeholder="Select item"
+        searchPlaceholder="Search..."
+       // value={value}
+        // onChange={item => {
+        //     setValue('gender',item.label);
+        // }}
+    />
+    //   familyMembersdetail.length >0 ? familyMembersdetail.map((item,index)=>(
+    //     //    <View key={index} style={{flexDirection:'row',marginTop:10,alignItems:'center' }}>
+    //             <TouchableOpacity key={index}  style={{backgroundColor:selectmembercolor === item.memberId?'#ccccff':'#eee', marginTop:10,width:300, height:40,paddingHorizontal:5*10, paddingTop:10}}
+    //                 onPress={()=>changecolor(item.memberId,item.firstName,item.middleName ,item.lastName )}
+    //                 >
+    //                     <Text style={{ textTransform:'uppercase',color:'#2F4F4F', fontWeight:'600',fontSize:16 }}>{item.firstName +" "+(item.middleName != null ?item.middleName :"")+" "+ item.lastName }</Text>  
+    //             </TouchableOpacity>      
                
                    
-        //    </View>
+    //     //    </View>
           
-      )) : <View></View>
+    //   )) : <View></View>
     )
   }
   function selectedFamilyMember(){
@@ -243,6 +337,10 @@ const FamilyMember = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: '#F5F5F5' }}>
+        <Spinner
+          visible={loading}
+          textStyle={styles.spinnerTextStyle}
+        />
             <StatusBar backgroundColor="#6979F8" />
             {
                 <ScrollView>
@@ -337,19 +435,21 @@ const FamilyMember = ({ navigation }) => {
                 </Modal>
 
             </View>
-              <View style={{ backgroundColor: selectedmembername != ''?'white':'#F5F5F5',alignItems: 'center', height:'10%'}}>
+              <View style={{ backgroundColor: selectmemberid != ''?'white':'#F5F5F5',alignItems: 'center', height:'15%'}}>
                 <View >
                     {
-                          selectedmembername != ''? 
-                          <View style={{  flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center'}}>
-                                <Text style={[stylessheet.textformat,{marginRight:15}]}>{selectedDate}</Text>
-                                <TouchableOpacity onPress={() => BookingSlot()} style={[stylessheet.buttonstylecss]}>
+                          selectmemberid != ''? 
+                          <View style={{  flexDirection: 'row',justifyContent: 'space-between', alignItems:'center', marginBottom:10}}>
+                                <View style={{width:'40%'}}>
+                                  <Text style={[stylessheet.textformat,{marginRight:15}]}>{selectedDate}</Text>
+                                </View>
+                                <View>
+                                    <TouchableOpacity onPress={() => BookingSlot()} style={[stylessheet.buttonstylecss]}>
+                                        <Text style={[stylessheet.textformat,{  color: '#FFFFFF' }]}>{'Confirm Booking'}</Text>
+                                    </TouchableOpacity>
 
-                                    <Text style={[stylessheet.textformat,{  color: '#FFFFFF' }]}>{'Confirm Booking'}</Text>
+                                </View>
 
-
-
-                                </TouchableOpacity>
                         </View> :<View></View>
                     }
 
@@ -373,7 +473,30 @@ FamilyMember.navigationOptions = {
 }
 
 const stylessheet = StyleSheet.create({
-
+    dropdown: {
+        margin: 16,
+        height: 50,
+        width:200,
+        paddingLeft:50,
+        borderBottomColor: 'gray',
+        borderBottomWidth:2, 
+        borderBottomColor:'#2F4F4F',
+        baseColor:"rgba(255, 255, 255, 1)",
+        color:"black"
+      },
+      icon: {
+        marginRight: 5,
+      },
+      placeholderStyle: {
+        fontSize: 16,
+      },
+      selectedTextStyle: {
+        fontSize: 16,
+      },
+      iconStyle: {
+        width: 20,
+        height: 20,
+      },
     textformat:{
         fontSize:16,
         lineHeight:22,

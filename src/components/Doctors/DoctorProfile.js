@@ -74,12 +74,20 @@ const DoctorProfile = ({ navigation }) => {
             setLoading(false);
         })
         //setLoading(true);
+
+        getslotsfromapi();
+    },[]);
+
+    function getslotsfromapi(){
+        const url = require('../../../assets/url.json');
         const time= new Date().toISOString().slice(0,10);
         const formatedtime=(time.replace('-','%2F')).replace('-','%2F');
+        console.log(url.timeslots+loginid+'/slots/'+id+'/'+formatedtime)
+        setLoading(true);
         axiosInstance.get(url.timeslots+loginid+'/slots/'+id+'/'+formatedtime).then(response => {
             if( response != null &&response.data != null && response.data.length >0)
             {
-                //setLoading(false);
+                setLoading(false);
                 const morningdata=[];
                 const afternoondata=[];
                 const eveningdata=[];
@@ -111,8 +119,7 @@ const DoctorProfile = ({ navigation }) => {
             console.log(error);
             setLoading(false);
         })
-      
-    },[]);
+    }
     function bookselectedslot(){
         dispatch(setSelectDoctorName(doctorName));
         dispatch(setDoctorExperience(new Date().getFullYear() -doctorAccountInfo.practicingFrom));
@@ -257,6 +264,7 @@ const DoctorProfile = ({ navigation }) => {
         console.log(date.toISOString().slice(0,10))
       //datesBlacklist="";
       setSelectedDay(date.toISOString().slice(0,10))
+      getslotsfromapi();
     }
     function slotsTime({ slots, time }) {
 
