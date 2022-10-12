@@ -44,7 +44,7 @@ const HomeConsultation = ({ navigation }) => {
 
                     <View style={{borderWidth:1, borderColor:'#eee', alignItems:'center',  marginTop:20}}>
                         <TouchableOpacity onPress={() => navigation.navigate('SearchInfo')}>
-                            <Avatar   source={{uri:'https://lirp.cdn-website.com/69c0b277/dms3rep/multi/opt/Video+Consultation-1920w.png'}} style={{height:100 , width: 120,paddingLeft:20, borderRadius: 75.0, paddingTop:10}}  />
+                            <Avatar   source={{uri:'https://lirp.cdn-website.com/69c0b277/dms3rep/multi/opt/Video+Consultation-1920w.png'}} style={{height:100 , width: 120,paddingLeft:20,paddingRight:20, borderRadius: 75.0, paddingTop:10}}  />
                             {/* <MaterialCommunityIcons name="video-account" size={24} color="black" /> */}
                             <Text style={[styles.textformat]}>{'Consultation'}</Text>
                         </TouchableOpacity>
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
         //letterSpacing:0,
         fontWeight:'500',
         alignItems: 'center',
-        paddingLeft: 5,
+        paddingLeft: 15,
         paddingRight: 5
     },
     dividerStyle: {
