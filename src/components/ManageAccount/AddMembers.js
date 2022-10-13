@@ -56,11 +56,11 @@ const AddMembers = ({ navigation }) => {
     const onSubmit = useCallback(formData => {
       const url = require('../../../assets/url.json');
       setLoading(true);
-      axiosInstance.post(url.addmember, formData).then(response => {
+      axiosInstance.post(url.getManageAccount+"/"+loginid+"/addMember", formData).then(response => {
         console.log('responsesignupdetail' +response.data);
         dispatch(setStateId(1));
         setLoading(false);
-        navigation.navigate('ManagefamilyMembers')
+        navigation.goBack();
     }).catch(error =>{
         console.log(error);
         setLoading(false);

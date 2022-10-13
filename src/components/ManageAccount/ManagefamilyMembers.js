@@ -22,26 +22,6 @@ const ManagefamilyMembers = ({ navigation }) => {
       };
     //const {navigate} = useIsFocused();
     const [familyMembersdetail, setFamilyMembers] = React.useState([]);
-    const data = [
-        {
-          firstName:"Vijaya",
-          middleName:"Kumari",
-          lastName:"Sunku",
-          gender:"female",
-          relation:"mother",
-          dob:"10/10/1992",
-          relationship:"SELF"
-        },
-        {
-            firstName:"lekha",
-            middleName:null,
-            lastName:"Sunku",
-            gender:"female",
-            relation:"mother",
-            dob:"10/10/1992",
-            relationship:"SELF"
-          }
-    ];
     
     React.useEffect(() => {
         debugger;
