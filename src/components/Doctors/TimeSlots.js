@@ -336,7 +336,7 @@ const TimeSlots = ({ navigation }) => {
 
       //datesBlacklist="";
       setSelectedDay(date.toISOString().slice(0,10))
-      setBook(true);
+      //setBook(true);
     }
     // let datesWhitelist = [{
     //     start: moment(),

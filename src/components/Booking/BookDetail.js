@@ -360,9 +360,10 @@ const BookDetail = ({ navigation }) => {
                      </View>
                 </Modal>
 
-            </View>
+            </View >
             {
-                (data != undefined ||data != null ) && data["status"] != 'CANCELLED' ?             <View style={{ marginTop: 3,height:'10%', backgroundColor:'#ffffff', flexDirection:'row'}}>
+                (data != undefined ||data != null ) && data["status"] != 'CANCELLED' ?             
+                <View style={{ marginTop: 3,height:'15%', backgroundColor:'#ffffff', flexDirection:'row'}}>
                 <View style={{paddingLeft:10 ,width:'33%',marginTop:10}}>
                     <TouchableOpacity style={{ backgroundColor:'#337ab7',alignItems:'center', borderRadius:20,   marginLeft:10,paddingBottom:10}}
                         onPress={()=>cancelAppointment()}
@@ -402,7 +403,7 @@ const BookDetail = ({ navigation }) => {
                 
                     </TouchableOpacity>
                 
-            </View>:<></>
+                     </View>:<></>
                 }
 
                     

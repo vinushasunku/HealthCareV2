@@ -37,6 +37,7 @@ const BookingList = ({ navigation }) => {
     const [selectedDate, setSelectedDay] = React.useState( moment().format('YYYY-MM-DD'));
  
     const [platformtype, setplatformtype] = React.useState(false);
+    const [status,setstatus]=React.useState(false);
     const setstate = useAppSelector(state => state.loginId.myState); 
     const [book, setBook] = React.useState(false);
     let datesBlacklist = moment() ;
@@ -280,6 +281,9 @@ const BookingList = ({ navigation }) => {
                 setAppointments(response.data.orders);
                
             }
+            else{
+                setstatus(true)
+            }
         }).catch(error =>{
             console.log(error);
         })
@@ -440,7 +444,14 @@ const BookingList = ({ navigation }) => {
                 />
         <View >
             <ScrollView >
-
+            {
+                        status === true?                     
+                        <View >
+                            <Text style={[stylessheet.textformat, stylessheet.textColor, stylessheet.headerfontsize,{paddingLeft:20, paddingTop:20,  fontSize:20, lineHeight:30}]}>    
+                                 {"No appointments are booked yet."}</Text>
+                        </View>
+                        :<></>
+                    }
             {bookingList()}
 
             </ScrollView>
