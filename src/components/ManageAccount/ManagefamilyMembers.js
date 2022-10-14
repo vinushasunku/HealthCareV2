@@ -33,6 +33,7 @@ const ManagefamilyMembers = ({ navigation }) => {
             if( response != null &&response.data != null && response.data['familyMembers'].length >0)
             {
                 setFamilyMembers(response.data['familyMembers']);
+                console.log(familyMembersdetail)
             }
         }).catch(error =>{
             setLoading(false);
@@ -44,8 +45,8 @@ const ManagefamilyMembers = ({ navigation }) => {
         return(
             <View style={{flexDirection: width>600 ?'row':'column', flexWrap:'wrap'}}>
               {
-                            familyMembersdetail.length >0 ? familyMembersdetail.map((item,index)=>(
-                                <View  key={index} style={{ flexDirection : "row", marginTop: 10.0,backgroundColor:'white',borderRadius:10, height:'2.5%',marginLeft:10, marginRight:10, width: width>600 ?350:width-20}}>
+                            familyMembersdetail.map((item,index)=>(
+                                <View  key={index} style={{ flexDirection : "row", marginTop: 10.0,backgroundColor:'white',borderRadius:10,marginLeft:10, marginRight:10, width: width>600 ?350:width-20, paddingBottom:10}}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         <View style={{paddingLeft:30, width:width >600 ? width/5:width/3.5}}>
                                             <Ionicons name="person" size={50} color="#2F4F4F" />
@@ -76,7 +77,7 @@ const ManagefamilyMembers = ({ navigation }) => {
                                     </View>
                                 </View>
                                 
-                            )) : <View></View>
+                            )) 
               }
             </View>
 
@@ -157,7 +158,7 @@ const stylessheet = StyleSheet.create({
         marginTop:10,
         alignItems:'center',
         paddingTop:10,
-        width:'50%'
+        width:'80%'
       }
 });
 
