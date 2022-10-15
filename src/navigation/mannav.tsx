@@ -90,7 +90,7 @@ function ManageStackNav(){
             <ManageStack.Screen name="Manage" component={ManageAccount} 
             options={({route}) => ({headerTitle:'Profile',headerBackVisible:false,headerTitleAlign:'center'})}   />
                         <ManageStack.Screen name="ManagefamilyMembers" component={ManagefamilyMembers} 
-            options={({route}) => ({headerTitle:'Manage family members',headerTitleAlign:'center'})}   />
+            options={({route}) => ({headerTitle:'Family members',headerTitleAlign:'center'})}   />
                         <ManageStack.Screen name="AddMembers" component={AddMembers} 
             options={({route}) => ({headerTitle:'Add Members',headerTitleAlign:'center'})}   />
                   <ManageStack.Screen name="BookingList" component={BookingList} 

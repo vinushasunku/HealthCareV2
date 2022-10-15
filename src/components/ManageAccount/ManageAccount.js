@@ -42,7 +42,7 @@ const ManageAccount = ({ navigation }) => {
     },[]);
     function signOutApplication(){
           dispatch(setLoginId(''));
-          navigation.navigate('Login')
+          navigation.navigate('Login');
     }
     function personInfo() {
         return(

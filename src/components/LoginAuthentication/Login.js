@@ -62,6 +62,7 @@ const Login = ({ navigation }) => {
             else{
                 const url = require('../../../assets/url.json');
                 const data=new loginModel(emailinput, passwordinput);  
+                console.log(url.loginurl);
                 startLoading();   
                 axiosInstance.post(url.loginurl, data).then(response => {
                     setLoading(false);

@@ -1,5 +1,5 @@
 {
-    "loginurl":"patient/account/login",
+    "loginurl":"https://ef6ncawnid.execute-api.ap-south-1.amazonaws.com/hospital/patient/account/login",
     "signup":"https://ef6ncawnid.execute-api.ap-south-1.amazonaws.com/hospital/patient/account/create",
     "getManageAccount":"https://ef6ncawnid.execute-api.ap-south-1.amazonaws.com/hospital/patient/account/",
     "addmember":"https://ef6ncawnid.execute-api.ap-south-1.amazonaws.com/hospital/patient/account/37f362ac-c1e9-4907-9620-fd818390dc2c/addMember",
