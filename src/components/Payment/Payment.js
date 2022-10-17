@@ -37,7 +37,7 @@ const Payment = ({ navigation }) => {
         // }).catch(error =>{
         //     console.log(error);
         // })
-        navigation.navigate('ConfirmOrder')
+        navigation.navigate('RazorpayPayment')
     }
     return (
         <View  style={{ flex: 1, }} backgroundColor="#F5F5F5">

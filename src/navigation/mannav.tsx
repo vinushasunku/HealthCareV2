@@ -10,6 +10,7 @@ import SearchInfo from '../components/SearchInfo/SearchInfo';
 import DoctorProfile from '../components/Doctors/DoctorProfile';
 import AppointmentBooking from '../components/AppointmentBooking/AppointmentBooking';
 import Payment from '../components/Payment/Payment';
+import RazorpayPayment from '../components/Payment/RazorpayPayment';
 import ConfirmOrder from '../components/ConfirmOrder/ConfirmOrder'
 import TimeSlots from '../components/Doctors/TimeSlots'
 import ManagefamilyMembers from '../components/ManageAccount/ManagefamilyMembers'
@@ -74,6 +75,8 @@ function SearchStackNav(){
             options={({route}) => ({headerTitle:'Booking Information',headerTitleAlign:'center'})}   />
             <SearchStack.Screen name="Payment" component={Payment} 
             options={({route}) => ({headerTitle:'Payment details',headerTitleAlign:'center'})}   />
+            <SearchStack.Screen name="RazorpayPayment" component={RazorpayPayment} 
+            options={({route}) => ({headerTitle:'Payment page',headerTitleAlign:'center'})}   />
             <SearchStack.Screen name="TimeSlots" component={TimeSlots} 
             options={({route}) => ({headerTitle:'Please select slot',headerTitleAlign:'center'})}   />
             <SearchStack.Screen name="ConfirmOrder" component={ConfirmOrder} 
