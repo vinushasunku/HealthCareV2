@@ -1,5 +1,6 @@
 import { StyleSheet} from 'react-native';
 import { Dimensions} from 'react-native';
+import Colors from './colors';
 const {height,width} =Dimensions.get('window');
 
 export const  styles = StyleSheet.create({
@@ -223,14 +224,42 @@ export const  styles = StyleSheet.create({
         color:'#f93'
       },
       textcolor:{
-        color:'#2F4F4F'
+        color:'#333333'
       },
       fontHeader:{
         fontWeight:'bold'
       },
       buttonstylecss:{
         backgroundColor:'#316BBE',alignItems:'center',borderRadius:25
-      }
+      },
+      backgroundmargin:{
+        marginTop:10,
+        marginLeft:10,
+        marginRight:10
+      },
+      headerfontsize:{
+        fontSize:17,
+        color:'black'
+    },
+    viewlinestyle:{
+      height:0.5,
+      width:'100%',
+      backgroundColor:Colors.BackgroundGray
+    },
+    textinputstyle:{
+      //  marginLeft:20,
+      //  marginBottom:5,
+       color:'black',
+       backgroundColor:Colors.White,
+       borderWidth:0.3,
+       borderColor:'black',
+       borderBottomColor:'black',
+       width:'85%',
+       //minHeight:30,
+       height:40,
+       textAlignVertical:'top'
+    }
+
 })
 export const textColor = {
     primary: '#6979F8',

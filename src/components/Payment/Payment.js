@@ -5,6 +5,7 @@ import axiosInstance from "../../services/APIService";
 import {useAppDispatch,useAppSelector} from '../redux/hooks'
 import {setorderId } from "../redux/slices/login";
 import Spinner from 'react-native-loading-spinner-overlay';
+import {RazorPay} from '../Payment/RazorPayPaymentProcess';
 // import Animated from "react-native-reanimated";
 const { width } = Dimensions.get('screen');
 
@@ -15,28 +16,28 @@ const Payment = ({ navigation }) => {
     const loginid = useAppSelector(state => state.loginId.loginId);
     const orderId =useAppSelector(state => state.loginId.orderId);
 
+    React.useEffect(() => {
+        console.log('payment in main page');
+        const url = require('../../../assets/url.json');
+        axiosInstance.get(url.commonurl+loginid+'/order/'+orderId).then(response => {
+            setLoading(false);
+            if( response != null &&response.data != null)
+            {
+                console.log("Data returned");
+                (async () => {
+                    const Razorpaymentid= await RazorPay(response.data["feePaid"],response.data["paymentDetails"]["paymentOrderId"],loginid,orderId,navigation);
+                    console.log('Testpayment'+Razorpaymentid)
+                  })();
 
-    function divider() {
-        return (
-            <View style={styles.dividerStyle}>
-            </View>
-        )
-    }
+            }
+        }).catch(error =>{
+            console.log(error);
+            setLoading(false)
+        })
+
+    },[1])
+
     function Payment(){
-        // const data={
-        //     "doctorId" :doctorId ,
-        //     "orderId" : orderId,
-        //     "feePaid" : fee
-        // }
-        // const url = require('../../../assets/url.json');
-        // axiosInstance.post(url.commonurl+loginid+'/conform_consultation',data ).then(response => {
-        //     console.log('responselogindetail',response.data);
-        //     navigation.navigate('BottomTabs', {
-        //         loginid:loginid
-        //     });
-        // }).catch(error =>{
-        //     console.log(error);
-        // })
         navigation.navigate('RazorpayPayment')
     }
     return (
@@ -45,34 +46,10 @@ const Payment = ({ navigation }) => {
                 visible={loading}
                 textStyle={styles.spinnerTextStyle}
                 />
-        <View style={{ flex: 1, backgroundColor: 'white',marginLeft:10, marginRight:10 }}>
+        <View style={[styles.backgroundmargin,{ flex: 1, backgroundColor: 'white'}]}>
             <StatusBar backgroundColor="#6979F8" />
             {
-                <ScrollView scrollEventThrottle={16}>
-
-
-                </ScrollView>
-
-            }
-
-            {
-               <View style={{marginBottom:20, marginTop:10}}>
-                <View style={{height:50,backgroundColor:"white"}}>
-                <View style={styles.bookContainerStyle}>
-
-                                    <View>
-                                        <Text style={[stylessheet.textformat,stylessheet.textColor,{paddingLeft:20, fontWeight:'bold'}]}>{'Rs '+fee}</Text>
-                                    </View>
-
-                            <TouchableOpacity onPress={() => Payment()}>
-                                <View style={[styles.buttonBookingStyle, {backgroundColor:'#337ab7'}]}>
-                                    <Text style={[stylessheet.textformat,{  color: '#FFFFFF' }]}>{'Conform Payment'}</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-
-                </View>
-              </View>
+                 <Text>{'Successfully payment is done'}</Text>
             }
 
         </View>

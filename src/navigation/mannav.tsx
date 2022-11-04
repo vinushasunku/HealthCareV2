@@ -11,6 +11,7 @@ import DoctorProfile from '../components/Doctors/DoctorProfile';
 import AppointmentBooking from '../components/AppointmentBooking/AppointmentBooking';
 import Payment from '../components/Payment/Payment';
 import RazorpayPayment from '../components/Payment/RazorpayPayment';
+import RazorPayPaymentProcess from '../components/Payment/RazorPayPaymentProcess';
 import ConfirmOrder from '../components/ConfirmOrder/ConfirmOrder'
 import TimeSlots from '../components/Doctors/TimeSlots'
 import ManagefamilyMembers from '../components/ManageAccount/ManagefamilyMembers'
@@ -34,6 +35,7 @@ const HomeStack=createNativeStackNavigator();
 const ManageStack=createNativeStackNavigator();
 const TestStack=createNativeStackNavigator();
 const SearchStack=createNativeStackNavigator();
+const PaymentStack=createNativeStackNavigator();
 function HomeStackNav(){
 
     return(
@@ -46,10 +48,10 @@ function HomeStackNav(){
             options={({route}) => ({headerTitle:'Doctor Details',headerTitleAlign:'center'})}   />
              <HomeStack.Screen name="AppointmentBooking" component={AppointmentBooking} 
             options={({route}) => ({headerTitle:'Booking Information',headerTitleAlign:'center'})}   />
-            <HomeStack.Screen name="Payment" component={Payment} 
-            options={({route}) => ({headerTitle:'Payment details',headerTitleAlign:'center'})}   />
             <HomeStack.Screen name="TimeSlots" component={TimeSlots} 
             options={({route}) => ({headerTitle:'Please select slot',headerTitleAlign:'center'})}   />
+            <HomeStack.Screen name="BookDetail" component={BookDetail} 
+            options={({route}) => ({headerTitle:'View Booking Details',headerTitleAlign:'center'})}   />
             <HomeStack.Screen name="ConfirmOrder" component={ConfirmOrder} 
             options={({route}) => ({headerTitle:'Conform Order',headerTitleAlign:'center'})}   />
             <TestStack.Screen name="LabSearch" component={LabSearch} 
@@ -58,11 +60,24 @@ function HomeStackNav(){
             options={({route}) => ({headerTitle:'Test package detail',headerBackTitle:'Back', headerTitleAlign:'center'})}   />
             <TestStack.Screen name="FamilyMember" component={FamilyMember} 
             options={({route}) => ({headerTitle:'Book Tests',headerBackTitle:'Back',headerTitleAlign:'center'})}   />
+            <HomeStack.Screen name="BookingList" component={BookingList} 
+            options={({route}) => ({headerTitle:'Book History',headerTitleAlign:'center'})}   />
         </HomeStack.Navigator>
     )
 
 }
+// function PaymentStackNav(){
 
+//     return(
+//           <PaymentStack.Navigator>
+//                 {/* <PaymentStack.Screen name="Payment" component={Payment} 
+//                   options={({route}) => ({headerTitle:'Payment details',headerTitleAlign:'center'})}   /> */}
+//                   <PaymentStack.Screen name="RazorPayPaymentProcess" component={RazorPayPaymentProcess} 
+//             options={({route}) => ({headerTitle:'Payment page',headerTitleAlign:'center'})}   />
+            
+//           </PaymentStack.Navigator>
+//     )
+// }
 function SearchStackNav(){
 
     return(
@@ -73,10 +88,12 @@ function SearchStackNav(){
             options={({route}) => ({headerTitle:'Doctor Details',headerTitleAlign:'center'})}   />
              <SearchStack.Screen name="AppointmentBooking" component={AppointmentBooking} 
             options={({route}) => ({headerTitle:'Booking Information',headerTitleAlign:'center'})}   />
-            <SearchStack.Screen name="Payment" component={Payment} 
+            {/* <SearchStack.Screen name="Payment" component={Payment} 
             options={({route}) => ({headerTitle:'Payment details',headerTitleAlign:'center'})}   />
             <SearchStack.Screen name="RazorpayPayment" component={RazorpayPayment} 
-            options={({route}) => ({headerTitle:'Payment page',headerTitleAlign:'center'})}   />
+            options={({route}) => ({headerTitle:'Payment page',headerTitleAlign:'center'})}   /> */}
+              {/* <SearchStack.Screen name="RazorpayPayment" component={RazorpayPayment} 
+            options={({route}) => ({headerTitle:'Payment page',headerTitleAlign:'center'})}   /> */}
             <SearchStack.Screen name="TimeSlots" component={TimeSlots} 
             options={({route}) => ({headerTitle:'Please select slot',headerTitleAlign:'center'})}   />
             <SearchStack.Screen name="ConfirmOrder" component={ConfirmOrder} 
@@ -124,8 +141,8 @@ function TestStackNav(){
             options={({route}) => ({headerTitle:'Test package detail',headerBackTitle:'Back', headerTitleAlign:'center'})}   />
             <TestStack.Screen name="FamilyMember" component={FamilyMember} 
             options={({route}) => ({headerTitle:'Book Tests',headerBackTitle:'Back',headerTitleAlign:'center'})}   />
-            <TestStack.Screen name="Payment" component={Payment} 
-            options={({route}) => ({headerTitle:'Payment details',headerTitleAlign:'center'})}   />
+            {/* <TestStack.Screen name="Payment" component={Payment} 
+            options={({route}) => ({headerTitle:'Payment details',headerTitleAlign:'center'})}   /> */}
              {/* <HomeStack.Screen name="Details" component={HomeConsultation} 
             options={({route}) => ({headerTitle:'Doctor Details',headerTitleAlign:'center'})}   /> */}
 
@@ -230,7 +247,11 @@ export function MainNav(){
                         <MainStack.Screen name="Signup" component={Signup}  options={{headerShown:false,headerBackVisible:true}}/>
                     </>
 
-                    :<MainStack.Screen name="Main" component={MainTab}  options={{headerShown:false}}/>
+                    :<>
+                        <MainStack.Screen name="Main" component={MainTab}  options={{headerShown:false}}/>
+                        {/* <MainStack.Screen name="PaymentInfo" component={PaymentStackNav}  options={{headerShown:false}}/> */}
+                    </>
+
                 }
            
                  

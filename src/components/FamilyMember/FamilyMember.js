@@ -12,6 +12,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import CalendarStrip from 'react-native-calendar-strip';
 import { Dropdown } from 'react-native-element-dropdown';
 import DatePicker from 'react-native-date-picker'
+import {RazorPayPaymentProcess} from '../Payment/RazorPayPaymentProcess';
 const { width,height } = Dimensions.get('screen');
 
 const FamilyMember = ({ navigation }) => {
@@ -31,6 +32,8 @@ const FamilyMember = ({ navigation }) => {
     const [familymemberdrpdowns, setdropdownlist] = React.useState([]);
     const [value, setselectedFMValue] = React.useState(null);
     const [date, setDate] = React.useState(new Date())
+    const [book, setBook] = React.useState(false);
+    
     const dispatch = useAppDispatch();
     const lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() + 7);
@@ -75,6 +78,7 @@ const FamilyMember = ({ navigation }) => {
         {
             setplatformtype(true)
         }
+        setBook(false)
         const url = require('../../../assets/url.json');
         setLoading(true);
 
@@ -99,7 +103,7 @@ const FamilyMember = ({ navigation }) => {
             
         })
         // settestDetailInfo(data)
-     },[labID]);
+     },[book]);
      function setselecteddatefromcalendar(date)
      {
          console.log(date.toISOString().slice(0,10))
@@ -120,7 +124,8 @@ const FamilyMember = ({ navigation }) => {
         axiosInstance.post(url.commonurl+loginid+'/initiateOrder',data).then(response => {
             console.log('responselogindetail',response.data);
             dispatch(setorderId(response.data))
-            navigation.navigate('Payment');
+            setBook(true);
+            //navigation.navigate('Payment');
             setLoading(false);
         }).catch(error =>{
             console.log(error);
@@ -336,7 +341,7 @@ const FamilyMember = ({ navigation }) => {
 
 
     return (
-        <View style={{ flex: 1, backgroundColor: '#F5F5F5' }}>
+        book === false?<View style={{ flex: 1, backgroundColor: '#F5F5F5' }}>
         <Spinner
           visible={loading}
           textStyle={styles.spinnerTextStyle}
@@ -456,7 +461,7 @@ const FamilyMember = ({ navigation }) => {
 
                 </View>
               </View>
-        </View>
+        </View>:<RazorPayPaymentProcess/>
         )
 }
 

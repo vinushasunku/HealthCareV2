@@ -11,8 +11,9 @@ import AntDesign  from 'react-native-vector-icons/AntDesign';
 import axiosInstance from '../../services/APIService';
 import Modal from "react-native-modal";
 import {useAppDispatch,useAppSelector} from '../redux/hooks'
-import {setorderId } from "../redux/slices/login";
+import {setorderId, setStateId } from "../redux/slices/login";
 import Spinner from 'react-native-loading-spinner-overlay';
+import {RazorPayPaymentProcess} from '../Payment/RazorPayPaymentProcess';
 const AppointmentBooking = ({ navigation }) => {
     const [loading, setLoading] = React.useState(false);
     const name = useAppSelector(state => state.loginId.doctorName);
@@ -21,7 +22,8 @@ const AppointmentBooking = ({ navigation }) => {
     const date = useAppSelector(state => state.loginId.selectedDate);
     const doctorId = useAppSelector(state => state.loginId.doctorId);
     const loginid = useAppSelector(state => state.loginId.loginId);
-
+    const orderId = useAppSelector(state => state.loginId.orderId);
+    const stateId = useAppSelector(state => state.loginId.stateId);
     const dispatch = useAppDispatch();
     const fee = useAppSelector(state => state.loginId.fee);
     const [book, setBook] = React.useState(false);
@@ -34,6 +36,11 @@ const AppointmentBooking = ({ navigation }) => {
     const [selectmembercolor, setselectmembercolor] = React.useState('');
     const [selectmemberid, setselectmemberid] = React.useState('');
     const [confirmbook, setconfirmBook] = React.useState(false);
+    const [intialOrder, setIntialOrder] = React.useState(false);
+    const reload=()=>{
+        console.log('reload')
+        window.location.reload()};
+    // const razorChild=React.useMemo(()=><RazorPayPaymentProcess />,[]);
     function changecolor(id, fn,mn,ln)
     {
        
@@ -60,7 +67,9 @@ const AppointmentBooking = ({ navigation }) => {
         setconfirmBook(true)
     }
     React.useEffect(() => {
-        console.log(date)
+        console.log('stateId',stateId)
+            setBook(false)
+        
         if(Platform.OS === 'ios' || Platform.OS === 'android' )
         {
             setplatformtype(true)
@@ -82,7 +91,7 @@ const AppointmentBooking = ({ navigation }) => {
         }).catch(error =>{
             console.log(error);
         })
-    },[1])
+    },[book])
 
     function familyMemberList(){
         return(
@@ -184,12 +193,24 @@ const AppointmentBooking = ({ navigation }) => {
         axiosInstance.post(url.commonurl+loginid+'/initiateOrder',data).then(response => {
             console.log('responselogindetail',response.data);
             dispatch(setorderId(response.data))
-            navigation.navigate('Payment');
+            const orderId=response.data;
+            setBook(true);
+            // dispatch(setStateId(1));
+            // console.log(stateId)
+            // RazorPay(fee,orderId);
+            //console.log(razorPayId);
+           // RazorPayPaymentProcess(navigation);
+           // navigation.navigate('PaymentInfo')
+            //navigation.navigate('PaymentInfo');
             setLoading(false);
         }).catch(error =>{
             setLoading(false);
             console.log(error);
         })
+
+        return (
+            <View />
+          );
     }
     function appointmentTimings()
     {
@@ -298,7 +319,7 @@ const AppointmentBooking = ({ navigation }) => {
  
     }
     return (
-        <View  style={{ flex: 1, }} backgroundColor="#F5F5F5">
+        book === false?<View  style={{ flex: 1, }} backgroundColor="#F5F5F5">
             <Spinner 
                 visible={loading}
                 textStyle={styles.spinnerTextStyle}
@@ -384,7 +405,7 @@ const AppointmentBooking = ({ navigation }) => {
             }
 
         </View>
-        </View>
+        </View> :<RazorPayPaymentProcess onRequestClose={reload}/>
         )
 }
 

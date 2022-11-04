@@ -3,13 +3,15 @@ import {Text,TouchableHighlight, View} from "react-native";
 import RazorpayCheckout from 'react-native-razorpay';
 import {useAppDispatch,useAppSelector} from '../redux/hooks';
 import axiosInstance from "../../services/APIService";
-
-const RazorpayPayment = (navigation) => {
+import {setStateId } from "../redux/slices/login";
+import {useNavigation} from '@react-navigation/native';
+ export const RazorPayPaymentProcess = () => {
+    const navigation = useNavigation();
     const [loading, setLoading] = React.useState(false);
     const loginid = useAppSelector(state => state.loginId.loginId);
     const orderid = useAppSelector(state => state.loginId.orderId);
     const [data,setData] = React.useState();
-
+    const dispatch = useAppDispatch();
     React.useEffect(() => {
         const url = require('../../../assets/url.json');
         console.log(orderid)
@@ -39,38 +41,51 @@ const RazorpayPayment = (navigation) => {
             amount: ''+fee+'00',
             name: 'Acme Corp',
             order_id: paymentOrderId,//Replace this with an order_id created using Orders API.
-            theme: {color: '#53a20e'}
+            theme: {color: '#53a20e'},
+            "modal": {
+                "ondismiss": function(){
+                    console.log('Checkout form closed');
+                }
+            }
           }
           console.log(options)
             RazorpayCheckout.open(options).then((data) => {
                 console.log(`Success: ${data.razorpay_payment_id}`);
-                conform();
+                if(data.razorpay_payment_id != undefined){
+                    conform();
+                }
+
             }).catch((error) => {
                 // handle failure
-                conform();
+                console.log("closed");
+                //dispatch(setStateId(2))
+                //navigation.navigate('AppointmentBooking')
+                //;
+               // conform();
             });
     }
-
     function conform(){
         const data={
             "orderId" : orderid
         }
         const url = require('../../../assets/url.json');
         axiosInstance.post(url.commonurl+loginid+'/conform',data ).then(response => {
-            console.log('responselogindetail',response.data);
+            navigation.navigate('BookingList')
         }).catch(error =>{
             console.log(error);
         })
     }
-
-    return (
-        <></>
-    // <View>
-    //     <TouchableHighlight onPress={() => paymentPage()}><Text >
-    //                         {"payment"}
-    //                         </Text></TouchableHighlight>
-    // </View>
-    )
+return(
+    <></>
+)
+    // return (
+    //     <></>
+    // // <View>
+    // //     <TouchableHighlight onPress={() => paymentPage()}><Text >
+    // //                         {"payment"}
+    // //                         </Text></TouchableHighlight>
+    // // </View>
+    // )
 }
 
-export default RazorpayPayment;
+//export default RazorPayPaymentProcess;

@@ -21,6 +21,7 @@ const loginSlice = createSlice({
     imageurl:undefined,
     userName: undefined,
     videoToken: undefined,
+    conformOrderAfterPayment:false
   },
   reducers: {
     setLoginId(state, action: PayloadAction<any>) {
@@ -76,12 +77,15 @@ const loginSlice = createSlice({
     setVideoToken(state, action: PayloadAction<any>) {
       state.videoToken = action.payload
     },
+    setconformOrderAfterPayment(state, action: PayloadAction<any>) {
+      state.conformOrderAfterPayment = action.payload
+    },
   }
 })
 
 export const { setLoginId,setsignupsuccessmessage,setType,
   setDoctorId,setSelectDoctorName,setDoctorExperience,setSelectselectedSlot,
   setSelectselectedDate,setfee,setorderId,setLabId,setStateId ,setUpdate,setOrderStatus,setImageUrl,
-  setUserName, setVideoToken} = loginSlice.actions
+  setUserName, setVideoToken,setconformOrderAfterPayment} = loginSlice.actions
 export default loginSlice.reducer
 
